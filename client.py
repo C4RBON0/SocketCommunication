@@ -3,44 +3,27 @@
 
 import socket
 
-def server_connect():
+def run_client():
+    # Server details
     ip = socket.gethostname()
     port = 12345
-    buffersize = 100
+    buffersize = 1024
     
-    soc = socket.socket()
-    soc.connect((ip,port))
-    
-    msg = "I would like to scan your ports, do I have the authoritation? (yes/no)"
-    soc.send(msg.encode())
-    soc.close()
-    #------------------------------------------------
-    soc = socket.socket()
-    soc.connect((ip,port))
-    soc.bind((ip, port))
-    soc.listen()
-    print("Waiting for server's response")
-    
+    soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    soc.connect((ip, port))
+
+    print("Connected to the server")
+
     while True:
-        con, addr = soc.accept()
-        print(f"The server address is; {addr}")
+        message = input("You: ")
+        soc.sendall(message.encode('utf-8'))
 
-        data = con.recv(buffersize).decode(encoding='utf-8')
-        #print(f'the received data is\n{data}')
-        break
-    
-    if (data == "yes"):
-        print("Permition conceded")
-    else:
-        print("Access denied")
+        data = soc.recv(buffersize).decode(encoding='utf-8')
+        if (data == "bye"):
+            print("Server disconnected.")
+            break
+        print(f"Server: {data}")
 
-        
-
-
-    
-    #s.close()
-        
-if __name__ == "__main__":
-    
-    print("Connecting to server...")
-    server_connect()
+if __name__ == '__main__':
+    print("Starting the client...")
+    run_client()
