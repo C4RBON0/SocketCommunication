@@ -2,6 +2,7 @@
 #This program enables us to receive and send messages to other device
 
 import socket
+import time
 
 def run_server():
     ip = socket.gethostname()
