@@ -7,6 +7,10 @@
 
  I'd like to fix this in the future.
 
+ I tryed using it on another device but it isn't working as it should, even so it works in one device.
+
  How to use it:
  This has been made in visual studio code (anaconda), to run it we can simply run one of the files (client.py/server.py)
  and then spliting the terminal to run the other, "simulating" another device.
+
+ 
